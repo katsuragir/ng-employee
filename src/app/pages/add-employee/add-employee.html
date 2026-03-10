@@ -83,7 +83,7 @@
                 <label class="text-[13px] font-bold text-gray-700 mb-2">Basic Salary (Rp)</label>
                 <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
                     subscriptSizing="dynamic">
-                    <input matInput formControlName="basicSalary" placeholder="Type amount">
+                    <input matInput formControlName="basicSalary" thousandSeparator placeholder="Type amount">
                     <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('required')"
                         class="text-[11px] mt-1">Required</mat-error>
                     <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('pattern')"

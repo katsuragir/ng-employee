@@ -16,12 +16,14 @@ import { groups, statuses } from '../../models/mock-data';
 import { BASIC_SALARY_PATTERN, SNACKBAR, SNACKBAR_MESSAGE } from '../../common/constanta/generic';
 import { PATH } from '../../common/constanta/path';
 
+import { ThousandSeparatorDirective } from '../../common/directive/thousand-separator';
+
 @Component({
   selector: 'app-add-employee',
   imports: [
     CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,
     MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule,
-    MatAutocompleteModule, MatSnackBarModule
+    MatAutocompleteModule, MatSnackBarModule, ThousandSeparatorDirective
   ],
   templateUrl: './add-employee.html',
   styleUrl: './add-employee.css',

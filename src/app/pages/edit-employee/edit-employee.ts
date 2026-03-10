@@ -16,12 +16,14 @@ import { BASIC_SALARY_PATTERN, ID, SNACKBAR, SNACKBAR_MESSAGE } from '../../comm
 import { groups, statuses } from '../../models/mock-data';
 import { PATH } from '../../common/constanta/path';
 
+import { ThousandSeparatorDirective } from '../../common/directive/thousand-separator';
+
 @Component({
   selector: 'app-edit-employee',
   imports: [
     CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule,
     MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule,
-    MatAutocompleteModule, MatSnackBarModule
+    MatAutocompleteModule, MatSnackBarModule, ThousandSeparatorDirective
   ],
   templateUrl: './edit-employee.html',
   styleUrl: './edit-employee.css',
