@@ -1,0 +1,30 @@
+<header class="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-6 shadow-sm z-10">
+
+    <div class="flex items-center gap-4">
+        <button mat-icon-button (click)="onToggle()" class="text-gray-500 hover:text-gray-700">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+
+    <div class="flex items-center gap-6">
+        <div class="hidden md:flex items-center text-sm text-gray-600 font-medium">
+            <span class="mr-2">{{ currentDate | date:'EEEE' }}</span>
+            <span class="text-gray-400">{{ currentDate | date:'d/MMM/yyyy' }}</span>
+        </div>
+
+        <button mat-icon-button class="text-gray-500 relative">
+            <mat-icon>notifications</mat-icon>
+        </button>
+
+        <div class="flex items-center gap-3 border-l border-gray-200 pl-4">
+            <div
+                class="w-8 h-8 rounded-full bg-[#54A182] text-white flex items-center justify-center font-bold text-sm">
+                AD
+            </div>
+            <div class="hidden sm:flex flex-col">
+                <span class="text-sm font-bold text-gray-800 leading-tight">Admin User</span>
+                <span class="text-xs text-gray-500 leading-tight">Super_Admin</span>
+            </div>
+        </div>
+    </div>
+</header>

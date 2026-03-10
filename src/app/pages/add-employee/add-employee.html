@@ -1,0 +1,137 @@
+<div class="h-full flex flex-col bg-white border border-gray-200 rounded-sm">
+
+    <div class="px-8 py-6">
+        <h2 class="text-[20px] font-bold text-gray-800">Create Employee</h2>
+    </div>
+
+    <div class="flex-1 px-8 overflow-y-auto pb-8">
+
+        <form [formGroup]="employeeForm" id="employeeForm" (ngSubmit)="onSubmit()"
+            class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">First Name</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput formControlName="firstName" placeholder="Type">
+                    <mat-error *ngIf="employeeForm.get('firstName')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Last Name</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput formControlName="lastName" placeholder="Type">
+                    <mat-error *ngIf="employeeForm.get('lastName')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Username</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput formControlName="username" placeholder="Type">
+                    <mat-error *ngIf="employeeForm.get('username')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Email</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput formControlName="email" type="email" placeholder="Type">
+                    <mat-error *ngIf="employeeForm.get('email')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                    <mat-error *ngIf="employeeForm.get('email')?.hasError('email')" class="text-[11px] mt-1">Invalid
+                        format</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Group / Role</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input type="text" matInput formControlName="group" [matAutocomplete]="autoGroup"
+                        (input)="filterGroup($event)" placeholder="Select">
+                    <mat-autocomplete #autoGroup="matAutocomplete">
+                        <mat-option *ngFor="let group of filteredGroups" [value]="group">
+                            {{ group }}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="employeeForm.get('group')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Status</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <mat-select formControlName="status" placeholder="Select">
+                        <mat-option *ngFor="let stat of statuses" [value]="stat">{{ stat }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="employeeForm.get('status')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Basic Salary (Rp)</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput formControlName="basicSalary" placeholder="Type amount">
+                    <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                    <mat-error *ngIf="employeeForm.get('basicSalary')?.hasError('pattern')"
+                        class="text-[11px] mt-1">Must be number</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Birth Date</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput [matDatepicker]="picker" formControlName="birthDate" [max]="maxDate"
+                        placeholder="Select date">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker" class="text-[#3D9B73]"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="employeeForm.get('birthDate')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="flex flex-col md:col-span-2">
+                <label class="text-[13px] font-bold text-gray-700 mb-2">Description Date</label>
+                <mat-form-field appearance="outline" class="w-full custom-material-input" hideRequiredMarker
+                    subscriptSizing="dynamic">
+                    <input matInput [matDatepicker]="descPicker" formControlName="description"
+                        placeholder="Select date">
+                    <mat-datepicker-toggle matIconSuffix [for]="descPicker"
+                        class="text-[#3D9B73]"></mat-datepicker-toggle>
+                    <mat-datepicker #descPicker></mat-datepicker>
+                    <mat-error *ngIf="employeeForm.get('description')?.hasError('required')"
+                        class="text-[11px] mt-1">Required</mat-error>
+                </mat-form-field>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="px-8 py-5 border-t border-gray-200 flex justify-end items-center gap-6 bg-white">
+        <button type="button" (click)="onCancel()"
+            class="text-[#3D9B73] font-bold text-[14px] hover:text-[#2c7556] transition-colors">
+            Cancel
+        </button>
+
+        <button type="submit" form="employeeForm" [disabled]="!employeeForm.valid"
+            [ngClass]="employeeForm.valid ? 'bg-[#3D9B73] text-white hover:bg-[#328260] cursor-pointer shadow-md' : 'bg-[#EAEAEA] text-[#A0A0A0] cursor-not-allowed shadow-none'"
+            class="px-8 py-2.5 rounded-[4px] text-[14px] font-medium transition-all duration-300">
+            Create
+        </button>
+    </div>
+
+</div>

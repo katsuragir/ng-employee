@@ -1,0 +1,94 @@
+<div class="w-full">
+
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+        <h1 class="text-2xl font-semibold text-gray-800">Employee Management</h1>
+
+        <button mat-flat-button (click)="navigateToAdd()"
+            class="!bg-[#3D9B73] !text-white !h-10 !px-6 !rounded mt-4 sm:mt-0">
+            Create Employee
+        </button>
+    </div>
+
+    <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full max-w-lg bg-white" subscriptSizing="dynamic">
+            <mat-icon matPrefix class="text-gray-400">search</mat-icon>
+            <input matInput [(ngModel)]="searchName" (keyup)="applyFilter()" placeholder="Search by Full Name or Email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full max-w-[200px] ml-0 sm:ml-4 mt-2 sm:mt-0 bg-white"
+            subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="searchGroup" (selectionChange)="applyFilter()" placeholder="Filter Group">
+                <mat-option value="">All Groups</mat-option>
+                <mat-option *ngFor="let group of groups" [value]="group">{{ group }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full max-w-[200px] ml-0 sm:ml-4 mt-2 sm:mt-0 bg-white"
+            subscriptSizing="dynamic">
+            <mat-select [(ngModel)]="searchStatus" (selectionChange)="applyFilter()" placeholder="Filter Status">
+                <mat-option value="">All Statuses</mat-option>
+                <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="text-sm text-gray-500 italic mt-3">
+            {{ dataSource.filteredData.length || 0 }} results found.
+        </div>
+    </div>
+
+    <div class="bg-white rounded border border-gray-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+            <table mat-table [dataSource]="dataSource" matSort class="w-full">
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-gray-600 font-semibold text-sm">
+                        Full Name </th>
+                    <td mat-cell *matCellDef="let element" class="font-bold text-gray-800 text-sm">
+                        {{element.firstName}} {{element.lastName}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="username">
+                    <th mat-header-cell *matHeaderCellDef class="text-gray-600 font-semibold text-sm"> Email </th>
+                    <td mat-cell *matCellDef="let element" class="text-gray-600 text-sm"> {{element.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="group">
+                    <th mat-header-cell *matHeaderCellDef class="text-gray-600 font-semibold text-sm"> Role </th>
+                    <td mat-cell *matCellDef="let element" class="text-gray-600 text-sm"> {{element.group}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="basicSalary">
+                    <th mat-header-cell *matHeaderCellDef class="text-gray-600 font-semibold text-sm"> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="px-2 py-1 border rounded text-xs font-bold uppercase tracking-wider"
+                            [ngClass]="{
+                                'bg-green-50 text-green-700 border-green-400': element.status === 'Active',
+                                'bg-yellow-50 text-yellow-700 border-yellow-400': element.status === 'Probation',
+                                'bg-gray-50 text-gray-700 border-gray-400': element.status === 'Inactive'
+                            }">
+                            {{element.status}}
+                        </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef class="text-right px-4"></th>
+                    <td mat-cell *matCellDef="let element" class="text-right px-4">
+                        <button mat-icon-button (click)="editEmployee(element, $event)"
+                            class="text-gray-400 hover:text-yellow-500"><mat-icon>edit</mat-icon></button>
+                        <button mat-icon-button (click)="deleteEmployee(element.id, element.firstName, $event)"
+                            class="text-gray-400 hover:text-red-500"><mat-icon>delete</mat-icon></button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"
+                    class="bg-gray-50 border-b border-gray-200"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                    (click)="viewDetail(row.id)" class="hover:bg-gray-50 cursor-pointer border-b border-gray-100"></tr>
+            </table>
+        </div>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons (page)="saveState()"
+            class="bg-white border-t border-gray-200"></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+
+.custom-material-input .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  min-height: 44px !important;
+}
+
+.custom-material-input .mdc-notched-outline__leading,
+.custom-material-input .mdc-notched-outline__notch,
+.custom-material-input .mdc-notched-outline__trailing {
+  border-width: 1px !important;
+  border-color: #E5E7EB !important;
+}
+
+.custom-material-input .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 4px;
+}
+
+.custom-material-input input::placeholder {
+  font-size: 13px;
+  color: #A0A0A0;
+}
+
+.snackbar-warning {
+  --mdc-snackbar-container-color: #eab308;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+.snackbar-warning .mat-mdc-button {
+  color: #333333 !important;
+}
+
+.snackbar-error {
+  --mdc-snackbar-container-color: #ef4444;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+.snackbar-error .mat-mdc-button {
+  color: #ffffff !important;
+}

@@ -1,0 +1,68 @@
+<div class="flex min-h-screen w-full bg-white font-sans">
+  
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-b from-[#8BD2AE] to-[#59A8BA] items-center justify-center p-12 relative overflow-hidden">
+  </div>
+
+  <div class="w-full lg:w-1/2 flex items-center justify-center px-8 sm:px-16 lg:px-24">
+    
+    <div class="w-full max-w-[380px]">
+      
+      <h1 class="text-[28px] font-semibold text-[#4A4A4A] mb-8 text-left tracking-tight">
+        Welcome back
+      </h1>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col">
+        
+        <div class="mb-6 p-3 bg-[#F3FBF9] border border-[#D1E7E0] rounded-[4px] flex items-center gap-3">
+          <mat-icon class="text-[#54A182] scale-75">info</mat-icon>
+          <p class="text-[12px] text-[#4A4A4A] leading-tight">
+            Use <span class="font-bold text-[#2E5E4E]">admin</span> and password <span class="font-bold text-[#2E5E4E]">admin123</span> to log in.
+          </p>
+        </div>
+
+        <div class="mb-5">
+          <label class="block text-[12px] font-bold text-[#555] mb-1.5">Email</label>
+          
+          <mat-form-field appearance="outline" class="w-full custom-material-input" subscriptSizing="dynamic">
+            <input matInput formControlName="username" placeholder="Type email">
+            <mat-error *ngIf="loginForm.get('username')?.hasError('required')" class="text-[11px] mt-1">
+              Email/Username wajib diisi
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-1.5">
+            <label class="block text-[12px] font-bold text-[#555]">Password</label>
+          </div>
+          
+          <mat-form-field appearance="outline" class="w-full custom-material-input" subscriptSizing="dynamic">
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Type password">
+            
+            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+              <mat-icon class="text-[#54A182] text-[20px]">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </button>
+
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')" class="text-[11px] mt-1">
+              Password wajib diisi
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="errorMessage" class="text-red-500 text-sm text-center font-medium mb-4">
+          {{ errorMessage }}
+        </div>
+
+        <button mat-flat-button type="submit" 
+          [disabled]="loginForm.invalid"
+          class="w-full !h-[44px] !text-[14px] !font-medium !rounded-[4px] shadow-none transition-all mt-6 
+                 disabled:!bg-gray-200 disabled:!text-gray-400 
+                 !bg-[#54A182] !text-white hover:!bg-[#63bd9a]">
+          Login
+        </button>
+        
+      </form>
+    </div>
+  </div>
+
+</div>

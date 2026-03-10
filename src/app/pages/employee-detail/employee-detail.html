@@ -1,0 +1,87 @@
+<div class="w-full h-full bg-white" *ngIf="employee">
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4">
+
+        <div class="flex items-center gap-3">
+            <button mat-icon-button (click)="goBack()" class="text-[#3D9B73]">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <h1 class="text-[22px] font-bold text-gray-800 m-0 leading-none">
+                {{ employee.firstName }} {{ employee.lastName }}
+            </h1>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button mat-flat-button (click)="deleteUser()"
+                class="!bg-[#C25953] !text-white !px-6 !rounded-[4px] !h-[38px] font-medium">
+                Delete User
+            </button>
+
+            <button mat-flat-button (click)="goToEdit()"
+                class="!bg-[#F59E0B] !text-white !px-6 !rounded-[4px] !h-[38px] font-medium">
+                Edit
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-[#F8F9FA] rounded-md p-6 sm:p-8 border border-gray-200">
+        <div class="flex flex-col gap-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Full Name</span>
+                <span class="text-[14px] text-gray-900 font-medium">{{ employee.firstName }} {{ employee.lastName
+                    }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Email</span>
+                <span class="text-[14px] text-gray-900 font-medium">{{ employee.email }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Role</span>
+                <span class="text-[14px] text-gray-900 font-medium">{{ employee.group }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Status</span>
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 border rounded-[4px] text-[12px] font-bold uppercase tracking-wider"
+                        [ngClass]="employee.status === 'Active' ? 'bg-green-50 text-green-700 border-green-300' : 'bg-[#EAEAEA] text-[#6B6B6B] border-[#D1D1D1]'">
+                        {{ employee.status }}
+                    </span>
+                    <span class="text-[13px] text-gray-400 font-medium" *ngIf="employee.status !== 'Active'">
+                        Deactivated users are blocked from login.
+                    </span>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 my-2"></div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Username</span>
+                <span class="text-[14px] text-gray-900 font-medium">{{ employee.username }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Birth Date</span>
+                <span class="text-[14px] text-gray-900 font-medium">{{ employee.birthDate | date:'dd MMMM yyyy'
+                    }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Basic Salary</span>
+                <span class="text-[15px] text-[#3D9B73] font-bold tracking-wide">{{ formatRupiah(employee.basicSalary)
+                    }}</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-[200px_1fr] md:grid-cols-[250px_1fr] items-center gap-1 sm:gap-4">
+                <span class="text-[13px] text-gray-500 font-semibold tracking-wide">Description Date</span>
+                <span class="text-[14px] text-gray-900 font-medium">{{ employee.description | date:'dd MMMM yyyy, HH:mm'
+                    }}</span>
+            </div>
+
+        </div>
+    </div>
+
+</div>
